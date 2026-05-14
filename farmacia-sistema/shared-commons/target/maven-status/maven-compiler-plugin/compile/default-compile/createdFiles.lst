@@ -1,0 +1,4 @@
+br/com/farmacia/shared/persistence/JsonFileHandler.class
+br/com/farmacia/shared/exception/EstoqueInsuficienteException.class
+br/com/farmacia/shared/exception/ReceitaInvalidaException.class
+br/com/farmacia/shared/exception/RecursoNaoEncontradoException.class

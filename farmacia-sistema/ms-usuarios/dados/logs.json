@@ -1,0 +1,16 @@
+[ {
+  "id" : 1,
+  "usuarioId" : 1,
+  "acao" : "LOGIN",
+  "dataHora" : "2026-05-14T17:33:44.845970818"
+}, {
+  "id" : 2,
+  "usuarioId" : 1,
+  "acao" : "LOGIN",
+  "dataHora" : "2026-05-14T17:41:11.467446611"
+}, {
+  "id" : 3,
+  "usuarioId" : 2,
+  "acao" : "LOGIN",
+  "dataHora" : "2026-05-14T17:42:35.489944225"
+} ]

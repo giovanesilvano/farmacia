@@ -1,0 +1,15 @@
+[ {
+  "id" : 1,
+  "dataHora" : "2026-05-14T17:41:43.352824512",
+  "cliente" : null,
+  "status" : "ABERTA",
+  "total" : null,
+  "itens" : null
+}, {
+  "id" : 2,
+  "dataHora" : "2026-05-14T17:43:10.619214093",
+  "cliente" : null,
+  "status" : "ABERTA",
+  "total" : null,
+  "itens" : null
+} ]

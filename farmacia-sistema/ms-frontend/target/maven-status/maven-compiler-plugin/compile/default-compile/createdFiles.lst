@@ -1,0 +1,14 @@
+br/com/farmacia/frontend/telas/TelaEstoque.class
+br/com/farmacia/frontend/telas/TelaVendas$1.class
+br/com/farmacia/frontend/telas/TelaUsuarios.class
+br/com/farmacia/frontend/telas/TelaSngpc$1.class
+br/com/farmacia/frontend/telas/TelaLogin.class
+br/com/farmacia/frontend/telas/TelaVendas.class
+br/com/farmacia/frontend/util/HttpClient.class
+br/com/farmacia/frontend/Main.class
+br/com/farmacia/frontend/telas/TelaPrincipal.class
+br/com/farmacia/frontend/telas/TelaUsuarios$1.class
+br/com/farmacia/frontend/telas/TelaDashboard.class
+br/com/farmacia/frontend/util/Cores.class
+br/com/farmacia/frontend/telas/TelaEstoque$1.class
+br/com/farmacia/frontend/telas/TelaSngpc.class

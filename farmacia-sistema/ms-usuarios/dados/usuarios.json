@@ -1,0 +1,19 @@
+[ {
+  "id" : 0,
+  "nome" : "string",
+  "login" : "string",
+  "senha" : "string",
+  "perfil" : "FARMACEUTICO"
+}, {
+  "id" : 1,
+  "nome" : "user",
+  "login" : "user",
+  "senha" : "1",
+  "perfil" : "FARMACEUTICO"
+}, {
+  "id" : 2,
+  "nome" : "2",
+  "login" : "atendente",
+  "senha" : "1",
+  "perfil" : "ATENDENTE"
+} ]
