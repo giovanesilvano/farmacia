@@ -1,4 +1,0 @@
-/home/giovanes/Documentos/Faculdade/Sistemas de Informação/Sistemas Corporativos/farmacia-sistema/shared-commons/src/main/java/br/com/farmacia/shared/exception/EstoqueInsuficienteException.java
-/home/giovanes/Documentos/Faculdade/Sistemas de Informação/Sistemas Corporativos/farmacia-sistema/shared-commons/src/main/java/br/com/farmacia/shared/exception/ReceitaInvalidaException.java
-/home/giovanes/Documentos/Faculdade/Sistemas de Informação/Sistemas Corporativos/farmacia-sistema/shared-commons/src/main/java/br/com/farmacia/shared/exception/RecursoNaoEncontradoException.java
-/home/giovanes/Documentos/Faculdade/Sistemas de Informação/Sistemas Corporativos/farmacia-sistema/shared-commons/src/main/java/br/com/farmacia/shared/persistence/JsonFileHandler.java

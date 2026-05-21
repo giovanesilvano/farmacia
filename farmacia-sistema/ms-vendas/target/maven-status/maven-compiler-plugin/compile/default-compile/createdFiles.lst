@@ -1,7 +1,0 @@
-br/com/farmacia/vendas/model/Venda.class
-br/com/farmacia/vendas/model/Receita.class
-br/com/farmacia/vendas/model/StatusVenda.class
-br/com/farmacia/vendas/repository/ReceitaRepository.class
-br/com/farmacia/vendas/model/ItemVenda.class
-br/com/farmacia/vendas/strategy/VendaControladaStrategy.class
-br/com/farmacia/vendas/strategy/VendaStrategy.class
