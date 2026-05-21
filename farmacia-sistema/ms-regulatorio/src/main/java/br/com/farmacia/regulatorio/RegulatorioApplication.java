@@ -1,7 +1,11 @@
 package br.com.farmacia.regulatorio;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 @SpringBootApplication
 public class RegulatorioApplication {
-    public static void main(String[] args) { SpringApplication.run(RegulatorioApplication.class, args); }
+    public static void main(String[] args) {
+        SpringApplication.run(RegulatorioApplication.class, args);
+    }
 }
