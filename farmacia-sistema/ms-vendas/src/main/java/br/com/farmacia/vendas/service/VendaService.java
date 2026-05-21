@@ -1,4 +1,5 @@
 package br.com.farmacia.vendas.service;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,10 +13,14 @@ import br.com.farmacia.vendas.model.Venda;
 import br.com.farmacia.vendas.repository.VendaRepository;
 import br.com.farmacia.vendas.strategy.VendaStrategy;
 import br.com.farmacia.vendas.strategy.VendaStrategyFactory;
+
 @Service
 public class VendaService {
-    @Autowired private VendaRepository vendaRepo;
-    @Autowired private VendaStrategyFactory strategyFactory;
+    @Autowired
+    private VendaRepository vendaRepo;
+    @Autowired
+    private VendaStrategyFactory strategyFactory;
+
     public Venda finalizarVenda(Venda venda) {
         venda.setDataHora(LocalDateTime.now());
         venda.setStatus(StatusVenda.ABERTA);
@@ -31,5 +36,8 @@ public class VendaService {
         salva.setStatus(StatusVenda.FINALIZADA);
         return vendaRepo.save(salva);
     }
-    public List<Venda> listarVendas() { return vendaRepo.findAll(); }
+
+    public List<Venda> listarVendas() {
+        return vendaRepo.findAll();
+    }
 }
