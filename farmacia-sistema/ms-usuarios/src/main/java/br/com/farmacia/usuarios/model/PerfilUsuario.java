@@ -1,2 +1,3 @@
 package br.com.farmacia.usuarios.model;
-public enum PerfilUsuario { FARMACEUTICO, ATENDENTE, GERENTE }
+
+public enum PerfilUsuario {FARMACEUTICO, ATENDENTE, GERENTE}
