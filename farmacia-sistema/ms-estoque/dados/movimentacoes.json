@@ -1,0 +1,15 @@
+[ {
+  "id" : 1,
+  "produtoId" : 1,
+  "tipo" : "ENTRADA",
+  "quantidade" : 1233,
+  "dataHora" : "2026-05-21T16:38:30.3504938",
+  "motivo" : "Entrada de material"
+}, {
+  "id" : 2,
+  "produtoId" : 1,
+  "tipo" : "SAIDA_VENDA",
+  "quantidade" : 1,
+  "dataHora" : "2026-05-21T16:38:46.3553969",
+  "motivo" : "Venda%201"
+} ]

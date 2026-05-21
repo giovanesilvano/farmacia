@@ -1,15 +1,16 @@
 [ {
   "id" : 1,
-  "dataHora" : "2026-05-14T17:41:43.352824512",
-  "cliente" : null,
-  "status" : "ABERTA",
-  "total" : null,
-  "itens" : null
-}, {
-  "id" : 2,
-  "dataHora" : "2026-05-14T17:43:10.619214093",
-  "cliente" : null,
-  "status" : "ABERTA",
-  "total" : null,
-  "itens" : null
+  "dataHora" : "2026-05-21T16:38:46.3322642",
+  "cliente" : "",
+  "status" : "FINALIZADA",
+  "total" : 20,
+  "itens" : [ {
+    "produtoId" : 1,
+    "nomeProduto" : "anti-inflamatório",
+    "controlado" : false,
+    "quantidade" : 1,
+    "precoUnitario" : 20,
+    "receitaId" : 0,
+    "subtotal" : 20
+  } ]
 } ]

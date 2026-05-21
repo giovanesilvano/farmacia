@@ -1,15 +1,22 @@
 [ {
-  "id" : 0,
-  "nome" : "analgesico",
-  "codigoBarras" : "123456",
-  "controlado" : true,
-  "estoqueMinimo" : 0,
-  "preco" : 10
-}, {
   "id" : 1,
   "nome" : "anti-inflamatório",
   "codigoBarras" : "321",
   "controlado" : false,
   "estoqueMinimo" : 10,
   "preco" : 20.0
+}, {
+  "id" : 2,
+  "nome" : "analgesico",
+  "codigoBarras" : "123456",
+  "controlado" : true,
+  "estoqueMinimo" : 0,
+  "preco" : 102
+}, {
+  "id" : 0,
+  "nome" : "analgesicoaaa",
+  "codigoBarras" : "123456",
+  "controlado" : true,
+  "estoqueMinimo" : 0,
+  "preco" : 10
 } ]
