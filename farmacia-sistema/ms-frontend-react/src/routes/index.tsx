@@ -4,12 +4,18 @@ import ProdutosPage from "../pages/ProdutosPage";
 import VendasPage from "../pages/VendasPage";
 import EstoquePage from "../pages/EstoquePage";
 import DashboardPage from "../pages/DashboardPage";
+import LoginPage from "../pages/LoginPage";
 
 function AppRoutes() {
 
   return (
 
     <Routes>
+
+        <Route
+            path="/login"
+            element={<LoginPage />}
+        />
 
         <Route
             path="/"
