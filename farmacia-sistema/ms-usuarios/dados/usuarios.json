@@ -16,4 +16,10 @@
   "login" : "atendente",
   "senha" : "1",
   "perfil" : "ATENDENTE"
+}, {
+  "id" : 3,
+  "nome" : "Lucas",
+  "login" : "lukaslipe",
+  "senha" : "$2a$10$H344ss5DZsliyxOS6HQ6iO0DdyVIqFtBlZk8uSJM0zmjjgUzKGULa",
+  "perfil" : "FARMACEUTICO"
 } ]

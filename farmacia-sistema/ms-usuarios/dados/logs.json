@@ -13,4 +13,9 @@
   "usuarioId" : 2,
   "acao" : "LOGIN",
   "dataHora" : "2026-05-14T17:42:35.489944225"
+}, {
+  "id" : 4,
+  "usuarioId" : 3,
+  "acao" : "LOGIN",
+  "dataHora" : "2026-05-23T15:12:45.8874728"
 } ]

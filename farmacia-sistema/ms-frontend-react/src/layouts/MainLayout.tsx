@@ -18,13 +18,13 @@ function MainLayout({ children }: Props) {
 
         <nav className="flex flex-col gap-4">
 
-            <Link to="/">
-                Dashboard
-            </Link>
+          <Link to="/">
+            Dashboard
+          </Link>
 
-            <Link to="/estoque">
-                Estoque
-            </Link>
+          <Link to="/estoque">
+            Estoque
+          </Link>
 
           <Link to="/produtos">
             Produtos

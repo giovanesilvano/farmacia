@@ -1,5 +1,7 @@
 package br.com.farmacia.usuarios.controller;
 
+import br.com.farmacia.usuarios.dto.LoginRequest;
+import br.com.farmacia.usuarios.dto.LoginResponse;
 import br.com.farmacia.usuarios.model.Usuario;
 import br.com.farmacia.usuarios.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +28,25 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Usuario> login(@RequestBody Map<String, String> creds) {
-        return ResponseEntity.ok(service.autenticar(creds.get("login"), creds.get("senha")));
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+
+        try {
+
+            String token = service.autenticar(
+                    request.getLogin(),
+                    request.getSenha()
+            );
+
+            return ResponseEntity.ok(new LoginResponse(token));
+
+        } catch (Exception e) {
+
+            return ResponseEntity.status(401).body(
+                    Map.of(
+                            "erro", "Usuário ou senha inválidos"
+                    )
+            );
+        }
     }
 
     @GetMapping("/logs")
