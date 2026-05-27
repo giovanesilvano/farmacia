@@ -1,17 +1,30 @@
 import axios from "axios";
 
-export const estoqueApi = axios.create({
-  baseURL: "http://localhost:8081",
-});
+function criarApi(baseURL: string) {
 
-export const vendasApi = axios.create({
-  baseURL: "http://localhost:8082",
-});
+    const api = axios.create({
+        baseURL
+    });
 
-export const regulatorioApi = axios.create({
-  baseURL: "http://localhost:8083",
-});
+    api.interceptors.request.use((config) => {
 
-export const usuariosApi = axios.create({
-  baseURL: "http://localhost:8084",
-});
+        const token = localStorage.getItem("token");
+
+        if (token) {
+
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+
+        return config;
+    });
+
+    return api;
+}
+
+export const estoqueApi = criarApi("http://localhost:8081");
+
+export const vendasApi = criarApi("http://localhost:8082");
+
+export const regulatorioApi = criarApi("http://localhost:8083");
+
+export const usuariosApi = criarApi("http://localhost:8084");

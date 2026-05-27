@@ -219,322 +219,563 @@ async function buscarProdutos() {
 
     <MainLayout>
 
-      <h1 className="text-3xl font-bold mb-8">
-        Controle de Estoque
-      </h1>
+        <div className="space-y-8">
 
-        <div className="bg-white p-8 rounded-2xl shadow mb-8">
+            {/* Header */}
 
-        <h2 className="text-2xl font-bold mb-6">
-            Produtos em Estoque
-        </h2>
+            <div className="flex items-center justify-between">
 
-        <div className="overflow-x-auto">
+                <div>
 
-            <table className="w-full">
+                    <h1 className="text-4xl font-bold text-slate-900">
+                        Controle de Estoque
+                    </h1>
 
-            <thead>
+                    <p className="text-slate-500 mt-2">
+                        Gerencie entradas, saídas e movimentações do estoque
+                    </p>
 
-                <tr className="border-b">
+                </div>
 
-                <th className="text-left py-3">
-                    Produto
-                </th>
+            </div>
 
-                <th className="text-left py-3">
-                    Preço
-                </th>
+            {/* Cards resumo */}
 
-                <th className="text-left py-3">
-                    Saldo
-                </th>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                </tr>
+                <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
 
-            </thead>
+                    <p className="text-slate-500 text-sm">
+                        Produtos cadastrados
+                    </p>
 
-            <tbody>
+                    <h2 className="text-4xl font-bold mt-2 text-slate-900">
+                        {produtos.length}
+                    </h2>
 
-                {produtos.map((produto) => (
+                </div>
 
-                <tr
-                    key={produto.id}
-                    className="border-b"
+                <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+
+                    <p className="text-slate-500 text-sm">
+                        Alertas de estoque
+                    </p>
+
+                    <h2 className="text-4xl font-bold mt-2 text-red-500">
+                        {alertas.length}
+                    </h2>
+
+                </div>
+
+                <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+
+                    <p className="text-slate-500 text-sm">
+                        Movimentações
+                    </p>
+
+                    <h2 className="text-4xl font-bold mt-2 text-slate-900">
+                        {historico.length}
+                    </h2>
+
+                </div>
+
+            </div>
+
+            {/* Produtos */}
+
+            <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+
+                <div className="p-6 border-b border-slate-200 flex items-center justify-between">
+
+                    <div>
+
+                        <h2 className="text-2xl font-bold text-slate-900">
+                            Produtos em Estoque
+                        </h2>
+
+                        <p className="text-slate-500 mt-1">
+                            Visualize os produtos e seus saldos atuais
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div className="overflow-x-auto">
+
+                    <table className="w-full">
+
+                        <thead className="bg-slate-50">
+
+                            <tr>
+
+                                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
+                                    Produto
+                                </th>
+
+                                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
+                                    Preço
+                                </th>
+
+                                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
+                                    Saldo
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            {produtos.map((produto) => (
+
+                                <tr
+                                    key={produto.id}
+                                    className="border-t border-slate-100 hover:bg-slate-50 transition"
+                                >
+
+                                    <td className="px-6 py-4 font-medium text-slate-800">
+                                        {produto.nome}
+                                    </td>
+
+                                    <td className="px-6 py-4 text-slate-600">
+                                        R$ {produto.preco}
+                                    </td>
+
+                                    <td className="px-6 py-4">
+
+                                        <span
+                                            className="
+                                                bg-blue-100
+                                                text-blue-700
+                                                px-3
+                                                py-1
+                                                rounded-full
+                                                text-sm
+                                                font-semibold
+                                            "
+                                        >
+                                            {produto.saldo ?? 0}
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+                            ))}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            {/* Forms */}
+
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+
+                {/* Entrada */}
+
+                <form
+                    onSubmit={entradaEstoque}
+                    className="
+                        bg-white
+                        rounded-3xl
+                        shadow-sm
+                        border
+                        border-slate-200
+                        p-8
+                        space-y-5
+                    "
                 >
 
-                    <td className="py-3">
-                    {produto.nome}
-                    </td>
-
-                    <td className="py-3">
-                    R$ {produto.preco}
-                    </td>
-
-                    <td className="py-3 font-bold">
-                    {produto.saldo ?? 0}
-                    </td>
-
-                </tr>
-
-                ))}
-
-            </tbody>
-
-            </table>
-
-        </div>
-
-        </div>
-
-      <div className="grid grid-cols-2 gap-8 mb-8">
-
-        <form
-          onSubmit={entradaEstoque}
-          className="bg-white p-8 rounded-2xl shadow space-y-4"
-        >
-
-          <h2 className="text-2xl font-bold">
-            Entrada de Estoque
-          </h2>
-
-          <select
-            value={produtoId}
-            onChange={(e) => setProdutoId(e.target.value)}
-            className="w-full border p-3 rounded-lg"
-          >
-
-            <option value="">
-              Selecione um produto
-            </option>
-
-            {produtos.map((produto) => (
-
-              <option
-                key={produto.id}
-                value={produto.id}
-              >
-                {produto.nome}
-              </option>
-
-            ))}
-
-          </select>
-
-          <input
-            type="number"
-            placeholder="Quantidade"
-            value={quantidade}
-            onChange={(e) => setQuantidade(e.target.value)}
-            className="w-full border p-3 rounded-lg"
-          />
-
-          <input
-            type="text"
-            placeholder="Lote"
-            value={lote}
-            onChange={(e) => setLote(e.target.value)}
-            className="w-full border p-3 rounded-lg"
-          />
-
-          <input
-            type="date"
-            value={dataValidade}
-            onChange={(e) => setDataValidade(e.target.value)}
-            className="w-full border p-3 rounded-lg"
-          />
-
-          <button
-            type="submit"
-            className="bg-blue-600 text-white px-5 py-3 rounded-xl"
-          >
-            Registrar Entrada
-          </button>
-
-        </form>
-
-        <form
-          onSubmit={registrarSaida}
-          className="bg-white p-8 rounded-2xl shadow space-y-4"
-        >
-
-          <h2 className="text-2xl font-bold">
-            Saída de Estoque
-          </h2>
-
-          <select
-            value={saidaProdutoId}
-            onChange={(e) => setSaidaProdutoId(e.target.value)}
-            className="w-full border p-3 rounded-lg"
-          >
-
-            <option value="">
-              Selecione um produto
-            </option>
-
-            {produtos.map((produto) => (
-
-              <option
-                key={produto.id}
-                value={produto.id}
-              >
-                {produto.nome}
-              </option>
-
-            ))}
-
-          </select>
-
-          <input
-            type="number"
-            placeholder="Quantidade"
-            value={saidaQuantidade}
-            onChange={(e) => setSaidaQuantidade(e.target.value)}
-            className="w-full border p-3 rounded-lg"
-          />
-
-          <input
-            type="text"
-            placeholder="Motivo"
-            value={motivo}
-            onChange={(e) => setMotivo(e.target.value)}
-            className="w-full border p-3 rounded-lg"
-          />
-
-          <button
-            type="submit"
-            className="bg-red-600 text-white px-5 py-3 rounded-xl"
-          >
-            Registrar Saída
-          </button>
-
-        </form>
-
-      </div>
-
-      <div className="bg-white p-8 rounded-2xl shadow mb-8">
-
-        <h2 className="text-2xl font-bold mb-6">
-          Alertas de Estoque Mínimo
-        </h2>
-
-        {alertas.length === 0 ? (
-
-          <p>
-            Nenhum alerta encontrado.
-          </p>
-
-        ) : (
-
-          <div className="space-y-4">
-
-            {alertas.map((produto) => (
-
-              <div
-                key={produto.id}
-                className="border border-red-400 bg-red-50 p-4 rounded-xl"
-              >
-
-                <h3 className="font-bold text-red-700">
-                  {produto.nome}
-                </h3>
-
-                <p className="text-red-600">
-                  Estoque abaixo do mínimo
-                </p>
-
-              </div>
-
-            ))}
-
-          </div>
-
-        )}
-
-      </div>
-
-      <div className="bg-white p-8 rounded-2xl shadow">
-
-        <h2 className="text-2xl font-bold mb-6">
-          Histórico de Movimentações
-        </h2>
-
-        <div className="overflow-x-auto">
-
-          <table className="w-full">
-
-            <thead>
-
-              <tr className="border-b">
-
-                <th className="text-left py-3">
-                  Produto ID
-                </th>
-
-                <th className="text-left py-3">
-                  Tipo
-                </th>
-
-                <th className="text-left py-3">
-                  Quantidade
-                </th>
-
-                <th className="text-left py-3">
-                  Motivo
-                </th>
-
-                <th className="text-left py-3">
-                  Data
-                </th>
-
-              </tr>
-
-            </thead>
-
-            <tbody>
-
-              {historico.map((mov) => (
-
-                <tr
-                  key={mov.id}
-                  className="border-b"
+                    <div>
+
+                        <h2 className="text-2xl font-bold text-slate-900">
+                            Entrada de Estoque
+                        </h2>
+
+                        <p className="text-slate-500 mt-1">
+                            Registre novas entradas de produtos
+                        </p>
+
+                    </div>
+
+                    <select
+                        value={produtoId}
+                        onChange={(e) => setProdutoId(e.target.value)}
+                        className="
+                            w-full
+                            border
+                            border-slate-200
+                            rounded-2xl
+                            px-4
+                            py-3
+                            outline-none
+                            focus:ring-2
+                            focus:ring-blue-500
+                        "
+                    >
+
+                        <option value="">
+                            Selecione um produto
+                        </option>
+
+                        {produtos.map((produto) => (
+
+                            <option
+                                key={produto.id}
+                                value={produto.id}
+                            >
+                                {produto.nome}
+                            </option>
+
+                        ))}
+
+                    </select>
+
+                    <input
+                        type="number"
+                        placeholder="Quantidade"
+                        value={quantidade}
+                        onChange={(e) => setQuantidade(e.target.value)}
+                        className="
+                            w-full
+                            border
+                            border-slate-200
+                            rounded-2xl
+                            px-4
+                            py-3
+                            outline-none
+                            focus:ring-2
+                            focus:ring-blue-500
+                        "
+                    />
+
+                    <input
+                        type="text"
+                        placeholder="Lote"
+                        value={lote}
+                        onChange={(e) => setLote(e.target.value)}
+                        className="
+                            w-full
+                            border
+                            border-slate-200
+                            rounded-2xl
+                            px-4
+                            py-3
+                            outline-none
+                            focus:ring-2
+                            focus:ring-blue-500
+                        "
+                    />
+
+                    <input
+                        type="date"
+                        value={dataValidade}
+                        onChange={(e) => setDataValidade(e.target.value)}
+                        className="
+                            w-full
+                            border
+                            border-slate-200
+                            rounded-2xl
+                            px-4
+                            py-3
+                            outline-none
+                            focus:ring-2
+                            focus:ring-blue-500
+                        "
+                    />
+
+                    <button
+                        type="submit"
+                        className="
+                            w-full
+                            bg-blue-600
+                            hover:bg-blue-700
+                            text-white
+                            font-semibold
+                            py-3
+                            rounded-2xl
+                            transition
+                            cursor-pointer
+                        "
+                    >
+                        Registrar Entrada
+                    </button>
+
+                </form>
+
+                {/* Saída */}
+
+                <form
+                    onSubmit={registrarSaida}
+                    className="
+                        bg-white
+                        rounded-3xl
+                        shadow-sm
+                        border
+                        border-slate-200
+                        p-8
+                        space-y-5
+                    "
                 >
 
-                  <td className="py-3">
-                    {mov.produtoId}
-                  </td>
+                    <div>
 
-                  <td className="py-3">
-                    {mov.tipo}
-                  </td>
+                        <h2 className="text-2xl font-bold text-slate-900">
+                            Saída de Estoque
+                        </h2>
 
-                  <td className="py-3">
-                    {mov.quantidade}
-                  </td>
+                        <p className="text-slate-500 mt-1">
+                            Registre retiradas de produtos
+                        </p>
 
-                  <td className="py-3">
-                    {mov.motivo}
-                  </td>
+                    </div>
 
-                  <td className="py-3">
-                    {new Date(
-                      mov.dataHora
-                    ).toLocaleString()}
-                  </td>
+                    <select
+                        value={saidaProdutoId}
+                        onChange={(e) => setSaidaProdutoId(e.target.value)}
+                        className="
+                            w-full
+                            border
+                            border-slate-200
+                            rounded-2xl
+                            px-4
+                            py-3
+                            outline-none
+                            focus:ring-2
+                            focus:ring-red-500
+                        "
+                    >
 
-                </tr>
+                        <option value="">
+                            Selecione um produto
+                        </option>
 
-              ))}
+                        {produtos.map((produto) => (
 
-            </tbody>
+                            <option
+                                key={produto.id}
+                                value={produto.id}
+                            >
+                                {produto.nome}
+                            </option>
 
-          </table>
+                        ))}
+
+                    </select>
+
+                    <input
+                        type="number"
+                        placeholder="Quantidade"
+                        value={saidaQuantidade}
+                        onChange={(e) => setSaidaQuantidade(e.target.value)}
+                        className="
+                            w-full
+                            border
+                            border-slate-200
+                            rounded-2xl
+                            px-4
+                            py-3
+                            outline-none
+                            focus:ring-2
+                            focus:ring-red-500
+                        "
+                    />
+
+                    <input
+                        type="text"
+                        placeholder="Motivo"
+                        value={motivo}
+                        onChange={(e) => setMotivo(e.target.value)}
+                        className="
+                            w-full
+                            border
+                            border-slate-200
+                            rounded-2xl
+                            px-4
+                            py-3
+                            outline-none
+                            focus:ring-2
+                            focus:ring-red-500
+                        "
+                    />
+
+                    <button
+                        type="submit"
+                        className="
+                            w-full
+                            bg-red-500
+                            hover:bg-red-600
+                            text-white
+                            font-semibold
+                            py-3
+                            rounded-2xl
+                            transition
+                            cursor-pointer
+                        "
+                    >
+                        Registrar Saída
+                    </button>
+
+                </form>
+
+            </div>
+
+            {/* Alertas */}
+
+            {alertas.length > 0 && (
+
+                <div className="bg-white rounded-3xl shadow-sm border border-slate-200 p-8">
+
+                    <h2 className="text-2xl font-bold text-slate-900 mb-6">
+                        Alertas de Estoque
+                    </h2>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                        {alertas.map((produto) => (
+
+                            <div
+                                key={produto.id}
+                                className="
+                                    border
+                                    border-red-200
+                                    bg-red-50
+                                    rounded-2xl
+                                    p-5
+                                "
+                            >
+
+                                <h3 className="font-bold text-red-700">
+                                    {produto.nome}
+                                </h3>
+
+                                <p className="text-red-600 mt-1 text-sm">
+                                    Estoque abaixo do mínimo permitido
+                                </p>
+
+                            </div>
+
+                        ))}
+
+                    </div>
+
+                </div>
+
+            )}
+
+            {/* Histórico */}
+
+            <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+
+                <div className="p-6 border-b border-slate-200">
+
+                    <h2 className="text-2xl font-bold text-slate-900">
+                        Histórico de Movimentações
+                    </h2>
+
+                </div>
+
+                <div className="overflow-x-auto">
+
+                    <table className="w-full">
+
+                        <thead className="bg-slate-50">
+
+                            <tr>
+
+                                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
+                                    Produto ID
+                                </th>
+
+                                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
+                                    Tipo
+                                </th>
+
+                                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
+                                    Quantidade
+                                </th>
+
+                                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
+                                    Motivo
+                                </th>
+
+                                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
+                                    Data
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            {historico.map((mov) => (
+
+                                <tr
+                                    key={mov.id}
+                                    className="border-t border-slate-100 hover:bg-slate-50 transition"
+                                >
+
+                                    <td className="px-6 py-4">
+                                        {mov.produtoId}
+                                    </td>
+
+                                    <td className="px-6 py-4">
+
+                                        <span
+                                            className={`
+                                                px-3
+                                                py-1
+                                                rounded-full
+                                                text-xs
+                                                font-bold
+                                                ${
+                                                    mov.tipo === "ENTRADA"
+                                                        ? "bg-green-100 text-green-700"
+                                                        : "bg-red-100 text-red-700"
+                                                }
+                                            `}
+                                        >
+                                            {mov.tipo}
+                                        </span>
+
+                                    </td>
+
+                                    <td className="px-6 py-4">
+                                        {mov.quantidade}
+                                    </td>
+
+                                    <td className="px-6 py-4">
+                                        {mov.motivo}
+                                    </td>
+
+                                    <td className="px-6 py-4 text-slate-500">
+                                        {new Date(
+                                            mov.dataHora
+                                        ).toLocaleString()}
+                                    </td>
+
+                                </tr>
+
+                            ))}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
 
         </div>
-
-      </div>
 
     </MainLayout>
-  );
+);
 }
 
 export default EstoquePage;

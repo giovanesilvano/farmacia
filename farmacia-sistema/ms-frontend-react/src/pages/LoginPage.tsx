@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 function LoginPage() {
 
@@ -29,11 +30,13 @@ function LoginPage() {
 
             localStorage.setItem("token", data.token);
 
+            toast.success("Login realizado com sucesso!");
+
             navigate("/");
 
         } else {
 
-            alert(data.erro);
+            toast.error(data.erro);
         }
     }
 
