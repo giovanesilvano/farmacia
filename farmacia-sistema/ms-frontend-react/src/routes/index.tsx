@@ -6,6 +6,8 @@ import EstoquePage from "../pages/EstoquePage";
 import DashboardPage from "../pages/DashboardPage";
 import LoginPage from "../pages/LoginPage";
 import PrivateRoute from "./PrivateRoute";
+import UsuariosPage from "../pages/UsuariosPage";
+import RegulatorioPage from "../pages/RegulatorioPage";
 
 function AppRoutes() {
 
@@ -50,6 +52,24 @@ function AppRoutes() {
             element={
                 <PrivateRoute>
                     <EstoquePage />
+                </PrivateRoute>
+            }
+        />
+
+        <Route
+            path="/usuarios"
+            element={
+                <PrivateRoute>
+                    <UsuariosPage />
+                </PrivateRoute>
+            }
+        />
+
+        <Route
+            path="/regulatorio"
+            element={
+                <PrivateRoute>
+                    <RegulatorioPage />
                 </PrivateRoute>
             }
         />
