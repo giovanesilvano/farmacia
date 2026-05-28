@@ -33,6 +33,12 @@ public class EstoqueService {
     }
 
     public void registrarSaida(Long produtoId, int quantidade, TipoMovimentacao tipo, String motivo) {
+        if (produtoId == null) {
+            throw new IllegalArgumentException(
+                    "Produto é obrigatório"
+            );
+        }
+
         List<ItemEstoque> itens = itemRepo.findByProdutoId(produtoId);
         int total = itens.stream().mapToInt(ItemEstoque::getQuantidade).sum();
         if (total < quantidade)

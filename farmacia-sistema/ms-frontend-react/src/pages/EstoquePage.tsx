@@ -1,31 +1,31 @@
 import { useEffect, useState } from "react";
 
 import MainLayout from "../layouts/MainLayout";
-
+import { toast } from "sonner";
 import { estoqueApi } from "../api/api";
 
 type Produto = {
-  id: number;
-  nome: string;
-  preco: number;
-  estoqueMinimo?: number;
+    id: number;
+    nome: string;
+    preco: number;
+    estoqueMinimo?: number;
 };
 
 type Movimentacao = {
-  id: number;
-  produtoId: number;
-  tipo: string;
-  quantidade: number;
-  dataHora: string;
-  motivo: string;
+    id: number;
+    produtoId: number;
+    tipo: string;
+    quantidade: number;
+    dataHora: string;
+    motivo: string;
 };
 
 type ProdutoComSaldo = {
-  id: number;
-  nome: string;
-  preco: number;
-  estoqueMinimo?: number;
-  saldo?: number;
+    id: number;
+    nome: string;
+    preco: number;
+    estoqueMinimo?: number;
+    saldo?: number;
 };
 
 function EstoquePage() {
@@ -34,318 +34,350 @@ function EstoquePage() {
         ProdutoComSaldo[]
     >([]);
 
-  const [historico, setHistorico] = useState<Movimentacao[]>([]);
+    const [historico, setHistorico] = useState<Movimentacao[]>([]);
 
-  const [alertas, setAlertas] = useState<Produto[]>([]);
+    const [alertas, setAlertas] = useState<Produto[]>([]);
 
-  const [produtoId, setProdutoId] = useState("");
+    const [produtoId, setProdutoId] = useState("");
 
-  const [quantidade, setQuantidade] = useState("");
+    const [quantidade, setQuantidade] = useState("");
 
-  const [lote, setLote] = useState("");
+    const [lote, setLote] = useState("");
 
-  const [dataValidade, setDataValidade] = useState("");
+    const [dataValidade, setDataValidade] = useState("");
 
-  const [saidaProdutoId, setSaidaProdutoId] = useState("");
+    const [saidaProdutoId, setSaidaProdutoId] = useState("");
 
-  const [saidaQuantidade, setSaidaQuantidade] = useState("");
+    const [saidaQuantidade, setSaidaQuantidade] = useState("");
 
-  const [motivo, setMotivo] = useState("");
+    const [motivo, setMotivo] = useState("");
 
-  useEffect(() => {
+    useEffect(() => {
 
-    buscarProdutos();
+        buscarProdutos();
 
-    buscarHistorico();
+        buscarHistorico();
 
-    buscarAlertas();
+        buscarAlertas();
 
-  }, []);
+    }, []);
 
-async function buscarProdutos() {
-
-  try {
-
-    const response = await estoqueApi.get(
-      "/api/produtos"
-    );
-
-    const produtosComSaldo = await Promise.all(
-
-      response.data.map(async (produto: ProdutoComSaldo) => {
+    async function buscarProdutos() {
 
         try {
 
-          const saldoResponse = await estoqueApi.get(
-            `/api/estoque/saldo/${produto.id}`
-          );
+            const response = await estoqueApi.get(
+                "/api/produtos"
+            );
 
-          return {
-            ...produto,
-            saldo: saldoResponse.data,
-          };
+            const produtosComSaldo = await Promise.all(
 
-        } catch {
+                response.data.map(async (produto: ProdutoComSaldo) => {
 
-          return {
-            ...produto,
-            saldo: 0,
-          };
+                    try {
+
+                        const saldoResponse = await estoqueApi.get(
+                            `/api/estoque/saldo/${produto.id}`
+                        );
+
+                        return {
+                            ...produto,
+                            saldo: saldoResponse.data,
+                        };
+
+                    } catch {
+
+                        return {
+                            ...produto,
+                            saldo: 0,
+                        };
+                    }
+                })
+            );
+
+            setProdutos(produtosComSaldo);
+
+        } catch (error) {
+
+            console.error(error);
         }
-      })
-    );
-
-    setProdutos(produtosComSaldo);
-
-  } catch (error) {
-
-    console.error(error);
-  }
-}
-
-  async function buscarHistorico() {
-
-    try {
-
-      const response = await estoqueApi.get(
-        "/api/estoque/historico"
-      );
-
-      setHistorico(response.data);
-
-    } catch (error) {
-
-      console.error(error);
     }
-  }
 
-  async function buscarAlertas() {
+    async function buscarHistorico() {
 
-    try {
+        try {
 
-      const response = await estoqueApi.get(
-        "/api/estoque/alertas"
-      );
+            const response = await estoqueApi.get(
+                "/api/estoque/historico"
+            );
 
-      setAlertas(response.data);
+            setHistorico(response.data);
 
-    } catch (error) {
+        } catch (error) {
 
-      console.error(error);
-    }
-  }
-
-  async function entradaEstoque(
-    e: React.FormEvent
-  ) {
-
-    e.preventDefault();
-
-    try {
-
-      await estoqueApi.post(
-
-        "/api/estoque/entrada",
-
-        {
-          produtoId: Number(produtoId),
-          quantidade: Number(quantidade),
-          dataValidade,
-          lote,
+            console.error(error);
         }
-      );
-
-      alert("Entrada registrada!");
-
-      setProdutoId("");
-      setQuantidade("");
-      setLote("");
-      setDataValidade("");
-
-      buscarHistorico();
-
-      buscarAlertas();
-
-    } catch (error) {
-
-      console.error(error);
-
-      alert("Erro ao registrar entrada");
     }
-  }
 
-  async function registrarSaida(
-    e: React.FormEvent
-  ) {
+    async function buscarAlertas() {
 
-    e.preventDefault();
+        try {
 
-    try {
+            const response = await estoqueApi.get(
+                "/api/estoque/alertas"
+            );
 
-      await estoqueApi.post(
+            setAlertas(response.data);
 
-        "/api/estoque/saida",
+        } catch (error) {
 
-        null,
-
-        {
-          params: {
-            produtoId: Number(saidaProdutoId),
-            quantidade: Number(saidaQuantidade),
-            motivo,
-          },
+            console.error(error);
         }
-      );
-
-      alert("Saída registrada!");
-
-      setSaidaProdutoId("");
-      setSaidaQuantidade("");
-      setMotivo("");
-
-      buscarHistorico();
-
-      buscarAlertas();
-
-    } catch (error) {
-
-      console.error(error);
-
-      alert("Erro ao registrar saída");
     }
-  }
 
-  return (
+    async function entradaEstoque(
+        e: React.FormEvent
+    ) {
 
-    <MainLayout>
+        e.preventDefault();
 
-        <div className="space-y-8">
+        try {
 
-            {/* Header */}
+            if (!produtoId) {
+                toast.error("Selecione um produto");
+                return;
+            }
 
-            <div className="flex items-center justify-between">
+            if (!quantidade) {
+                toast.error("Informe a quantidade");
+                return;
+            }
 
-                <div>
+            if (!lote) {
+                toast.error("Informe o lote");
+                return;
+            }
 
-                    <h1 className="text-4xl font-bold text-slate-900">
-                        Controle de Estoque
-                    </h1>
+            if (!dataValidade) {
+                toast.error("Informe a data de validade");
+                return;
+            }
 
-                    <p className="text-slate-500 mt-2">
-                        Gerencie entradas, saídas e movimentações do estoque
-                    </p>
+            await estoqueApi.post(
 
-                </div>
+                "/api/estoque/entrada",
 
-            </div>
+                {
+                    produtoId: Number(produtoId),
+                    quantidade: Number(quantidade),
+                    dataValidade,
+                    lote,
+                }
+            );
 
-            {/* Cards resumo */}
+            toast.success("Entrada registrada!");
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            setProdutoId("");
+            setQuantidade("");
+            setLote("");
+            setDataValidade("");
 
-                <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+            buscarHistorico();
+            buscarProdutos();
+            buscarAlertas();
 
-                    <p className="text-slate-500 text-sm">
-                        Produtos cadastrados
-                    </p>
+        } catch (error) {
 
-                    <h2 className="text-4xl font-bold mt-2 text-slate-900">
-                        {produtos.length}
-                    </h2>
+            console.error(error);
 
-                </div>
+            toast.error("Erro ao registrar entrada");
+        }
+    }
 
-                <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+    async function registrarSaida(e: React.FormEvent) {
+        e.preventDefault();
 
-                    <p className="text-slate-500 text-sm">
-                        Alertas de estoque
-                    </p>
+        try {
 
-                    <h2 className="text-4xl font-bold mt-2 text-red-500">
-                        {alertas.length}
-                    </h2>
+            if (!saidaProdutoId) {
+                toast.error("Selecione um produto");
+                return;
+            }
 
-                </div>
+            if (!saidaQuantidade) {
+                toast.error("Informe a quantidade");
+                return;
+            }
 
-                <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+            if (!motivo.trim()) {
+                toast.error("Informe o motivo");
+                return;
+            }
 
-                    <p className="text-slate-500 text-sm">
-                        Movimentações
-                    </p>
+            await estoqueApi.post(
 
-                    <h2 className="text-4xl font-bold mt-2 text-slate-900">
-                        {historico.length}
-                    </h2>
+                "/api/estoque/saida",
 
-                </div>
+                null,
 
-            </div>
+                {
+                    params: {
+                        produtoId: Number(saidaProdutoId),
+                        quantidade: Number(saidaQuantidade),
+                        motivo,
+                    },
+                }
+            );
 
-            {/* Produtos */}
+            toast.success("Saída registrada!");
 
-            <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+            setSaidaProdutoId("");
+            setSaidaQuantidade("");
+            setMotivo("");
 
-                <div className="p-6 border-b border-slate-200 flex items-center justify-between">
+            buscarHistorico();
+
+            buscarAlertas();
+
+        } catch (error) {
+
+            console.error(error);
+
+            toast.error("Erro ao registrar saída");
+        }
+    }
+
+    return (
+
+        <MainLayout>
+
+            <div className="space-y-8">
+
+                {/* Header */}
+
+                <div className="flex items-center justify-between">
 
                     <div>
 
-                        <h2 className="text-2xl font-bold text-slate-900">
-                            Produtos em Estoque
-                        </h2>
+                        <h1 className="text-4xl font-bold text-slate-900">
+                            Controle de Estoque
+                        </h1>
 
-                        <p className="text-slate-500 mt-1">
-                            Visualize os produtos e seus saldos atuais
+                        <p className="text-slate-500 mt-2">
+                            Gerencie entradas, saídas e movimentações do estoque
                         </p>
 
                     </div>
 
                 </div>
 
-                <div className="overflow-x-auto">
+                {/* Cards resumo */}
 
-                    <table className="w-full">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                        <thead className="bg-slate-50">
+                    <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
 
-                            <tr>
+                        <p className="text-slate-500 text-sm">
+                            Produtos cadastrados
+                        </p>
 
-                                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
-                                    Produto
-                                </th>
+                        <h2 className="text-4xl font-bold mt-2 text-slate-900">
+                            {produtos.length}
+                        </h2>
 
-                                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
-                                    Preço
-                                </th>
+                    </div>
 
-                                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
-                                    Saldo
-                                </th>
+                    <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
 
-                            </tr>
+                        <p className="text-slate-500 text-sm">
+                            Alertas de estoque
+                        </p>
 
-                        </thead>
+                        <h2 className="text-4xl font-bold mt-2 text-red-500">
+                            {alertas.length}
+                        </h2>
 
-                        <tbody>
+                    </div>
 
-                            {produtos.map((produto) => (
+                    <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
 
-                                <tr
-                                    key={produto.id}
-                                    className="border-t border-slate-100 hover:bg-slate-50 transition"
-                                >
+                        <p className="text-slate-500 text-sm">
+                            Movimentações
+                        </p>
 
-                                    <td className="px-6 py-4 font-medium text-slate-800">
-                                        {produto.nome}
-                                    </td>
+                        <h2 className="text-4xl font-bold mt-2 text-slate-900">
+                            {historico.length}
+                        </h2>
 
-                                    <td className="px-6 py-4 text-slate-600">
-                                        R$ {produto.preco}
-                                    </td>
+                    </div>
 
-                                    <td className="px-6 py-4">
+                </div>
 
-                                        <span
-                                            className="
+                {/* Produtos */}
+
+                <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+
+                    <div className="p-6 border-b border-slate-200 flex items-center justify-between">
+
+                        <div>
+
+                            <h2 className="text-2xl font-bold text-slate-900">
+                                Produtos em Estoque
+                            </h2>
+
+                            <p className="text-slate-500 mt-1">
+                                Visualize os produtos e seus saldos atuais
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div className="overflow-x-auto">
+
+                        <table className="w-full">
+
+                            <thead className="bg-slate-50">
+
+                                <tr>
+
+                                    <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
+                                        Produto
+                                    </th>
+
+                                    <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
+                                        Preço
+                                    </th>
+
+                                    <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
+                                        Saldo
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                {produtos.map((produto) => (
+
+                                    <tr
+                                        key={produto.id}
+                                        className="border-t border-slate-100 hover:bg-slate-50 transition"
+                                    >
+
+                                        <td className="px-6 py-4 font-medium text-slate-800">
+                                            {produto.nome}
+                                        </td>
+
+                                        <td className="px-6 py-4 text-slate-600">
+                                            R$ {produto.preco}
+                                        </td>
+
+                                        <td className="px-6 py-4">
+
+                                            <span
+                                                className="
                                                 bg-blue-100
                                                 text-blue-700
                                                 px-3
@@ -354,33 +386,33 @@ async function buscarProdutos() {
                                                 text-sm
                                                 font-semibold
                                             "
-                                        >
-                                            {produto.saldo ?? 0}
-                                        </span>
+                                            >
+                                                {produto.saldo ?? 0}
+                                            </span>
 
-                                    </td>
+                                        </td>
 
-                                </tr>
+                                    </tr>
 
-                            ))}
+                                ))}
 
-                        </tbody>
+                            </tbody>
 
-                    </table>
+                        </table>
+
+                    </div>
 
                 </div>
 
-            </div>
+                {/* Forms */}
 
-            {/* Forms */}
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
 
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                    {/* Entrada */}
 
-                {/* Entrada */}
-
-                <form
-                    onSubmit={entradaEstoque}
-                    className="
+                    <form
+                        onSubmit={entradaEstoque}
+                        className="
                         bg-white
                         rounded-3xl
                         shadow-sm
@@ -389,59 +421,59 @@ async function buscarProdutos() {
                         p-8
                         space-y-5
                     "
-                >
-
-                    <div>
-
-                        <h2 className="text-2xl font-bold text-slate-900">
-                            Entrada de Estoque
-                        </h2>
-
-                        <p className="text-slate-500 mt-1">
-                            Registre novas entradas de produtos
-                        </p>
-
-                    </div>
-
-                    <select
-                        value={produtoId}
-                        onChange={(e) => setProdutoId(e.target.value)}
-                        className="
-                            w-full
-                            border
-                            border-slate-200
-                            rounded-2xl
-                            px-4
-                            py-3
-                            outline-none
-                            focus:ring-2
-                            focus:ring-blue-500
-                        "
                     >
 
-                        <option value="">
-                            Selecione um produto
-                        </option>
+                        <div>
 
-                        {produtos.map((produto) => (
+                            <h2 className="text-2xl font-bold text-slate-900">
+                                Entrada de Estoque
+                            </h2>
 
-                            <option
-                                key={produto.id}
-                                value={produto.id}
-                            >
-                                {produto.nome}
+                            <p className="text-slate-500 mt-1">
+                                Registre novas entradas de produtos
+                            </p>
+
+                        </div>
+
+                        <select
+                            value={produtoId}
+                            onChange={(e) => setProdutoId(e.target.value)}
+                            className="
+                            w-full
+                            border
+                            border-slate-200
+                            rounded-2xl
+                            px-4
+                            py-3
+                            outline-none
+                            focus:ring-2
+                            focus:ring-blue-500
+                        "
+                        >
+
+                            <option value="">
+                                Selecione um produto
                             </option>
 
-                        ))}
+                            {produtos.map((produto) => (
 
-                    </select>
+                                <option
+                                    key={produto.id}
+                                    value={produto.id}
+                                >
+                                    {produto.nome}
+                                </option>
 
-                    <input
-                        type="number"
-                        placeholder="Quantidade"
-                        value={quantidade}
-                        onChange={(e) => setQuantidade(e.target.value)}
-                        className="
+                            ))}
+
+                        </select>
+
+                        <input
+                            type="number"
+                            placeholder="Quantidade"
+                            value={quantidade}
+                            onChange={(e) => setQuantidade(e.target.value)}
+                            className="
                             w-full
                             border
                             border-slate-200
@@ -452,14 +484,14 @@ async function buscarProdutos() {
                             focus:ring-2
                             focus:ring-blue-500
                         "
-                    />
+                        />
 
-                    <input
-                        type="text"
-                        placeholder="Lote"
-                        value={lote}
-                        onChange={(e) => setLote(e.target.value)}
-                        className="
+                        <input
+                            type="text"
+                            placeholder="Lote"
+                            value={lote}
+                            onChange={(e) => setLote(e.target.value)}
+                            className="
                             w-full
                             border
                             border-slate-200
@@ -470,13 +502,13 @@ async function buscarProdutos() {
                             focus:ring-2
                             focus:ring-blue-500
                         "
-                    />
+                        />
 
-                    <input
-                        type="date"
-                        value={dataValidade}
-                        onChange={(e) => setDataValidade(e.target.value)}
-                        className="
+                        <input
+                            type="date"
+                            value={dataValidade}
+                            onChange={(e) => setDataValidade(e.target.value)}
+                            className="
                             w-full
                             border
                             border-slate-200
@@ -487,11 +519,11 @@ async function buscarProdutos() {
                             focus:ring-2
                             focus:ring-blue-500
                         "
-                    />
+                        />
 
-                    <button
-                        type="submit"
-                        className="
+                        <button
+                            type="submit"
+                            className="
                             w-full
                             bg-blue-600
                             hover:bg-blue-700
@@ -502,17 +534,17 @@ async function buscarProdutos() {
                             transition
                             cursor-pointer
                         "
-                    >
-                        Registrar Entrada
-                    </button>
+                        >
+                            Registrar Entrada
+                        </button>
 
-                </form>
+                    </form>
 
-                {/* Saída */}
+                    {/* Saída */}
 
-                <form
-                    onSubmit={registrarSaida}
-                    className="
+                    <form
+                        onSubmit={registrarSaida}
+                        className="
                         bg-white
                         rounded-3xl
                         shadow-sm
@@ -521,59 +553,59 @@ async function buscarProdutos() {
                         p-8
                         space-y-5
                     "
-                >
-
-                    <div>
-
-                        <h2 className="text-2xl font-bold text-slate-900">
-                            Saída de Estoque
-                        </h2>
-
-                        <p className="text-slate-500 mt-1">
-                            Registre retiradas de produtos
-                        </p>
-
-                    </div>
-
-                    <select
-                        value={saidaProdutoId}
-                        onChange={(e) => setSaidaProdutoId(e.target.value)}
-                        className="
-                            w-full
-                            border
-                            border-slate-200
-                            rounded-2xl
-                            px-4
-                            py-3
-                            outline-none
-                            focus:ring-2
-                            focus:ring-red-500
-                        "
                     >
 
-                        <option value="">
-                            Selecione um produto
-                        </option>
+                        <div>
 
-                        {produtos.map((produto) => (
+                            <h2 className="text-2xl font-bold text-slate-900">
+                                Saída de Estoque
+                            </h2>
 
-                            <option
-                                key={produto.id}
-                                value={produto.id}
-                            >
-                                {produto.nome}
+                            <p className="text-slate-500 mt-1">
+                                Registre retiradas de produtos
+                            </p>
+
+                        </div>
+
+                        <select
+                            value={saidaProdutoId}
+                            onChange={(e) => setSaidaProdutoId(e.target.value)}
+                            className="
+                            w-full
+                            border
+                            border-slate-200
+                            rounded-2xl
+                            px-4
+                            py-3
+                            outline-none
+                            focus:ring-2
+                            focus:ring-red-500
+                        "
+                        >
+
+                            <option value="">
+                                Selecione um produto
                             </option>
 
-                        ))}
+                            {produtos.map((produto) => (
 
-                    </select>
+                                <option
+                                    key={produto.id}
+                                    value={produto.id}
+                                >
+                                    {produto.nome}
+                                </option>
 
-                    <input
-                        type="number"
-                        placeholder="Quantidade"
-                        value={saidaQuantidade}
-                        onChange={(e) => setSaidaQuantidade(e.target.value)}
-                        className="
+                            ))}
+
+                        </select>
+
+                        <input
+                            type="number"
+                            placeholder="Quantidade"
+                            value={saidaQuantidade}
+                            onChange={(e) => setSaidaQuantidade(e.target.value)}
+                            className="
                             w-full
                             border
                             border-slate-200
@@ -584,14 +616,14 @@ async function buscarProdutos() {
                             focus:ring-2
                             focus:ring-red-500
                         "
-                    />
+                        />
 
-                    <input
-                        type="text"
-                        placeholder="Motivo"
-                        value={motivo}
-                        onChange={(e) => setMotivo(e.target.value)}
-                        className="
+                        <input
+                            type="text"
+                            placeholder="Motivo"
+                            value={motivo}
+                            onChange={(e) => setMotivo(e.target.value)}
+                            className="
                             w-full
                             border
                             border-slate-200
@@ -602,11 +634,11 @@ async function buscarProdutos() {
                             focus:ring-2
                             focus:ring-red-500
                         "
-                    />
+                        />
 
-                    <button
-                        type="submit"
-                        className="
+                        <button
+                            type="submit"
+                            className="
                             w-full
                             bg-red-500
                             hover:bg-red-600
@@ -617,165 +649,164 @@ async function buscarProdutos() {
                             transition
                             cursor-pointer
                         "
-                    >
-                        Registrar Saída
-                    </button>
+                        >
+                            Registrar Saída
+                        </button>
 
-                </form>
+                    </form>
 
-            </div>
+                </div>
 
-            {/* Alertas */}
+                {/* Alertas */}
 
-            {alertas.length > 0 && (
+                {alertas.length > 0 && (
 
-                <div className="bg-white rounded-3xl shadow-sm border border-slate-200 p-8">
+                    <div className="bg-white rounded-3xl shadow-sm border border-slate-200 p-8">
 
-                    <h2 className="text-2xl font-bold text-slate-900 mb-6">
-                        Alertas de Estoque
-                    </h2>
+                        <h2 className="text-2xl font-bold text-slate-900 mb-6">
+                            Alertas de Estoque
+                        </h2>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                        {alertas.map((produto) => (
+                            {alertas.map((produto) => (
 
-                            <div
-                                key={produto.id}
-                                className="
+                                <div
+                                    key={produto.id}
+                                    className="
                                     border
                                     border-red-200
                                     bg-red-50
                                     rounded-2xl
                                     p-5
                                 "
-                            >
+                                >
 
-                                <h3 className="font-bold text-red-700">
-                                    {produto.nome}
-                                </h3>
+                                    <h3 className="font-bold text-red-700">
+                                        {produto.nome}
+                                    </h3>
 
-                                <p className="text-red-600 mt-1 text-sm">
-                                    Estoque abaixo do mínimo permitido
-                                </p>
+                                    <p className="text-red-600 mt-1 text-sm">
+                                        Estoque abaixo do mínimo permitido
+                                    </p>
 
-                            </div>
+                                </div>
 
-                        ))}
+                            ))}
+
+                        </div>
 
                     </div>
 
-                </div>
+                )}
 
-            )}
+                {/* Histórico */}
 
-            {/* Histórico */}
+                <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
 
-            <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div className="p-6 border-b border-slate-200">
 
-                <div className="p-6 border-b border-slate-200">
+                        <h2 className="text-2xl font-bold text-slate-900">
+                            Histórico de Movimentações
+                        </h2>
 
-                    <h2 className="text-2xl font-bold text-slate-900">
-                        Histórico de Movimentações
-                    </h2>
+                    </div>
 
-                </div>
+                    <div className="overflow-x-auto">
 
-                <div className="overflow-x-auto">
+                        <table className="w-full">
 
-                    <table className="w-full">
+                            <thead className="bg-slate-50">
 
-                        <thead className="bg-slate-50">
+                                <tr>
 
-                            <tr>
+                                    <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
+                                        Produto ID
+                                    </th>
 
-                                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
-                                    Produto ID
-                                </th>
+                                    <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
+                                        Tipo
+                                    </th>
 
-                                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
-                                    Tipo
-                                </th>
+                                    <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
+                                        Quantidade
+                                    </th>
 
-                                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
-                                    Quantidade
-                                </th>
+                                    <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
+                                        Motivo
+                                    </th>
 
-                                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
-                                    Motivo
-                                </th>
+                                    <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
+                                        Data
+                                    </th>
 
-                                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">
-                                    Data
-                                </th>
+                                </tr>
 
-                            </tr>
+                            </thead>
 
-                        </thead>
+                            <tbody>
 
-                        <tbody>
+                                {historico.map((mov) => (
 
-                            {historico.map((mov) => (
+                                    <tr
+                                        key={mov.id}
+                                        className="border-t border-slate-100 hover:bg-slate-50 transition"
+                                    >
 
-                                <tr
-                                    key={mov.id}
-                                    className="border-t border-slate-100 hover:bg-slate-50 transition"
-                                >
+                                        <td className="px-6 py-4">
+                                            {mov.produtoId}
+                                        </td>
 
-                                    <td className="px-6 py-4">
-                                        {mov.produtoId}
-                                    </td>
+                                        <td className="px-6 py-4">
 
-                                    <td className="px-6 py-4">
-
-                                        <span
-                                            className={`
+                                            <span
+                                                className={`
                                                 px-3
                                                 py-1
                                                 rounded-full
                                                 text-xs
                                                 font-bold
-                                                ${
-                                                    mov.tipo === "ENTRADA"
+                                                ${mov.tipo === "ENTRADA"
                                                         ? "bg-green-100 text-green-700"
                                                         : "bg-red-100 text-red-700"
-                                                }
+                                                    }
                                             `}
-                                        >
-                                            {mov.tipo}
-                                        </span>
+                                            >
+                                                {mov.tipo}
+                                            </span>
 
-                                    </td>
+                                        </td>
 
-                                    <td className="px-6 py-4">
-                                        {mov.quantidade}
-                                    </td>
+                                        <td className="px-6 py-4">
+                                            {mov.quantidade}
+                                        </td>
 
-                                    <td className="px-6 py-4">
-                                        {mov.motivo}
-                                    </td>
+                                        <td className="px-6 py-4">
+                                            {mov.motivo}
+                                        </td>
 
-                                    <td className="px-6 py-4 text-slate-500">
-                                        {new Date(
-                                            mov.dataHora
-                                        ).toLocaleString()}
-                                    </td>
+                                        <td className="px-6 py-4 text-slate-500">
+                                            {new Date(
+                                                mov.dataHora
+                                            ).toLocaleString()}
+                                        </td>
 
-                                </tr>
+                                    </tr>
 
-                            ))}
+                                ))}
 
-                        </tbody>
+                            </tbody>
 
-                    </table>
+                        </table>
+
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
-
-    </MainLayout>
-);
+        </MainLayout>
+    );
 }
 
 export default EstoquePage;

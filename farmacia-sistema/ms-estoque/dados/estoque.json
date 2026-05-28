@@ -1,7 +1,25 @@
 [ {
   "id" : 1,
   "produtoId" : 1,
-  "quantidade" : 1232,
-  "dataValidade" : "2028-12-12",
-  "lote" : "abc123"
+  "quantidade" : 10,
+  "dataValidade" : "2028-02-12",
+  "lote" : "ABC-123"
+}, {
+  "id" : 2,
+  "produtoId" : 1,
+  "quantidade" : 1,
+  "dataValidade" : "1111-11-01",
+  "lote" : "1"
+}, {
+  "id" : 3,
+  "produtoId" : 1,
+  "quantidade" : 1,
+  "dataValidade" : null,
+  "lote" : "1"
+}, {
+  "id" : 4,
+  "produtoId" : 1,
+  "quantidade" : 1,
+  "dataValidade" : "2028-02-12",
+  "lote" : "2"
 } ]

@@ -253,11 +253,12 @@ function ProdutosPage() {
               />
 
               <input
-                type="text"
-                placeholder="Código de barras"
-                value={codigoBarras}
-                onChange={(e) => setCodigoBarras(e.target.value)}
-                className="w-full border p-3 rounded-lg"
+                  type="text"
+                  placeholder="Código de barras"
+                  value={codigoBarras}
+                  onChange={(e) => setCodigoBarras(e.target.value)}
+                  maxLength={13}
+                  className="w-full border p-3 rounded-lg"
               />
 
               <input
