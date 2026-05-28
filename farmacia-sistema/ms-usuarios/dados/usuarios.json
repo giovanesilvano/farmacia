@@ -1,31 +1,13 @@
 [ {
-  "id" : 0,
-  "nome" : "string",
-  "login" : "string",
-  "senha" : "string",
-  "perfil" : "FARMACEUTICO"
-}, {
-  "id" : 1,
-  "nome" : "user",
-  "login" : "user",
-  "senha" : "1",
-  "perfil" : "FARMACEUTICO"
-}, {
-  "id" : 2,
-  "nome" : "2",
-  "login" : "atendente",
-  "senha" : "1",
-  "perfil" : "ATENDENTE"
-}, {
-  "id" : 3,
-  "nome" : "Lucas",
-  "login" : "lukaslipe",
-  "senha" : "$2a$10$H344ss5DZsliyxOS6HQ6iO0DdyVIqFtBlZk8uSJM0zmjjgUzKGULa",
-  "perfil" : "FARMACEUTICO"
-}, {
   "id" : 4,
   "nome" : "lks",
   "login" : "lucas",
   "senha" : "$2a$10$pA3PYXsIe24bfl0UU29YsOAc2.oYAMOcKCE8yI6mACjnsQfiG0kZq",
   "perfil" : "FARMACEUTICO"
+}, {
+  "id" : 5,
+  "nome" : null,
+  "login" : "eloisa",
+  "senha" : "$2a$10$d39qAmmLNJsSZNabw4uWDewiDuOFD4JeHPgmpGRDeFAs1hOv3TRGG",
+  "perfil" : "ATENDENTE"
 } ]

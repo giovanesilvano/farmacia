@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { toast } from "sonner";
 import MainLayout from "../layouts/MainLayout";
 
 import { usuariosApi } from "../api/api";
@@ -62,13 +62,13 @@ function UsuariosPage() {
         perfil: "ATENDENTE"
       });
 
-      alert("Usuário criado com sucesso!");
+      toast.success("Usuário criado com sucesso!");
 
     } catch (error) {
 
       console.error(error);
 
-      alert("Erro ao criar usuário");
+      toast.error("Erro ao criar usuário");
     }
   }
 

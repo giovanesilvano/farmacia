@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { toast } from "sonner";
 import MainLayout from "../layouts/MainLayout";
 
 import { regulatorioApi } from "../api/api";
@@ -61,13 +61,13 @@ function RegulatorioPage() {
         tipoMovimentacao: "ENTRADA"
       });
 
-      alert("Registro enviado com sucesso!");
+      toast.success("Registro enviado com sucesso!");
 
     } catch (error) {
 
       console.error(error);
 
-      alert("Erro ao registrar movimentação");
+      toast.error("Erro ao registrar movimentação");
     }
   }
 

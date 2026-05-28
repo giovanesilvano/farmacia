@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import MainLayout from "../layouts/MainLayout";
-
+import { toast } from "sonner";
 import { estoqueApi, vendasApi } from "../api/api";
 
 type Produto = {
@@ -116,7 +116,7 @@ function VendasPage() {
       const temControlado = carrinho.some((i) => i.controlado);
 
       if (temControlado && !receitaSelecionada) {
-        alert("Selecione uma receita para produtos controlados");
+        toast.error("Selecione uma receita para produtos controlados");
         return;
       }
 
@@ -132,14 +132,14 @@ function VendasPage() {
 
       await vendasApi.post("/api/vendas", payload);
 
-      alert("Venda realizada com sucesso!");
+      toast.success("Venda realizada com sucesso!");
 
       setCarrinho([]);
       setCliente("");
       setReceitaSelecionada(null);
     } catch (error) {
       console.error(error);
-      alert("Erro ao finalizar venda");
+      toast.error("Erro ao finalizar venda");
     }
   }
 
