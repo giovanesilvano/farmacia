@@ -25,7 +25,13 @@
 }, {
   "id" : 5,
   "produtoId" : 2,
-  "quantidade" : 1,
+  "quantidade" : 0,
   "dataValidade" : "2028-12-12",
   "lote" : "1111"
+}, {
+  "id" : 6,
+  "produtoId" : 2,
+  "quantidade" : 112,
+  "dataValidade" : "2030-03-12",
+  "lote" : "asdasdas"
 } ]

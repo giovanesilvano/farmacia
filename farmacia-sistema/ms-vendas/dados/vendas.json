@@ -13,4 +13,124 @@
     "receitaId" : 0,
     "subtotal" : 10
   } ]
+}, {
+  "id" : 2,
+  "dataHora" : "2026-05-28T18:16:17.1228746",
+  "cliente" : "teste",
+  "status" : "ABERTA",
+  "total" : 10,
+  "itens" : [ {
+    "produtoId" : 2,
+    "nomeProduto" : "CONTROLADO",
+    "controlado" : true,
+    "quantidade" : 1,
+    "precoUnitario" : 10,
+    "receitaId" : 0,
+    "subtotal" : 10
+  } ]
+}, {
+  "id" : 3,
+  "dataHora" : "2026-05-28T18:18:28.9200589",
+  "cliente" : "",
+  "status" : "ABERTA",
+  "total" : 10,
+  "itens" : [ {
+    "produtoId" : 2,
+    "nomeProduto" : "CONTROLADO",
+    "controlado" : true,
+    "quantidade" : 1,
+    "precoUnitario" : 10,
+    "receitaId" : 1,
+    "subtotal" : 10
+  } ]
+}, {
+  "id" : 4,
+  "dataHora" : "2026-05-28T18:18:32.6248272",
+  "cliente" : "teste",
+  "status" : "ABERTA",
+  "total" : 10,
+  "itens" : [ {
+    "produtoId" : 2,
+    "nomeProduto" : "CONTROLADO",
+    "controlado" : true,
+    "quantidade" : 1,
+    "precoUnitario" : 10,
+    "receitaId" : 1,
+    "subtotal" : 10
+  } ]
+}, {
+  "id" : 5,
+  "dataHora" : "2026-05-28T18:18:50.0850627",
+  "cliente" : "Teste",
+  "status" : "ABERTA",
+  "total" : 10,
+  "itens" : [ {
+    "produtoId" : 2,
+    "nomeProduto" : "CONTROLADO",
+    "controlado" : true,
+    "quantidade" : 1,
+    "precoUnitario" : 10,
+    "receitaId" : 2,
+    "subtotal" : 10
+  } ]
+}, {
+  "id" : 6,
+  "dataHora" : "2026-05-28T18:19:39.5846773",
+  "cliente" : "teste",
+  "status" : "ABERTA",
+  "total" : 10,
+  "itens" : [ {
+    "produtoId" : 2,
+    "nomeProduto" : "CONTROLADO",
+    "controlado" : true,
+    "quantidade" : 1,
+    "precoUnitario" : 10,
+    "receitaId" : 1,
+    "subtotal" : 10
+  } ]
+}, {
+  "id" : 7,
+  "dataHora" : "2026-05-28T18:21:23.2716912",
+  "cliente" : "teste",
+  "status" : "ABERTA",
+  "total" : 10,
+  "itens" : [ {
+    "produtoId" : 2,
+    "nomeProduto" : "CONTROLADO",
+    "controlado" : true,
+    "quantidade" : 1,
+    "precoUnitario" : 10,
+    "receitaId" : 1,
+    "subtotal" : 10
+  } ]
+}, {
+  "id" : 8,
+  "dataHora" : "2026-05-28T18:23:34.760471",
+  "cliente" : "teste",
+  "status" : "FINALIZADA",
+  "total" : 10,
+  "itens" : [ {
+    "produtoId" : 2,
+    "nomeProduto" : "CONTROLADO",
+    "controlado" : true,
+    "quantidade" : 1,
+    "precoUnitario" : 10,
+    "receitaId" : 1,
+    "subtotal" : 10
+  } ]
+}, {
+  "id" : 9,
+  "dataHora" : "2026-05-28T18:23:56.7463457",
+  "cliente" : "atesasd",
+  "status" : "FINALIZADA",
+  "total" : 80,
+  "itens" : [ {
+    "produtoId" : 2,
+    "nomeProduto" : "CONTROLADO",
+    "controlado" : true,
+    "quantidade" : 8,
+    "precoUnitario" : 10,
+    "receitaId" : 2,
+    "subtotal" : 80
+  } ]
 } ]

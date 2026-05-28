@@ -1,0 +1,17 @@
+[ {
+  "id" : 1,
+  "produtoId" : 2,
+  "nomeProduto" : "CONTROLADO",
+  "tipo" : "SAIDA",
+  "quantidade" : 1,
+  "dataHora" : "2026-05-28T18:23:35.1180302",
+  "vendaId" : 8
+}, {
+  "id" : 2,
+  "produtoId" : 2,
+  "nomeProduto" : "CONTROLADO",
+  "tipo" : "SAIDA",
+  "quantidade" : 8,
+  "dataHora" : "2026-05-28T18:23:56.7978922",
+  "vendaId" : 9
+} ]

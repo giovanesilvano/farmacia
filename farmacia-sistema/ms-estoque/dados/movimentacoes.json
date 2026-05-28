@@ -54,4 +54,46 @@
   "quantidade" : 1,
   "dataHora" : "2026-05-28T16:29:42.6706599",
   "motivo" : "Entrada de material"
+}, {
+  "id" : 9,
+  "produtoId" : 2,
+  "tipo" : "SAIDA_VENDA",
+  "quantidade" : 1,
+  "dataHora" : "2026-05-28T18:18:29.1802842",
+  "motivo" : "Venda%20Controlada%203"
+}, {
+  "id" : 10,
+  "produtoId" : 2,
+  "tipo" : "ENTRADA",
+  "quantidade" : 123,
+  "dataHora" : "2026-05-28T18:19:32.3262802",
+  "motivo" : "Entrada de material"
+}, {
+  "id" : 11,
+  "produtoId" : 2,
+  "tipo" : "SAIDA_VENDA",
+  "quantidade" : 1,
+  "dataHora" : "2026-05-28T18:19:39.6633385",
+  "motivo" : "Venda%20Controlada%206"
+}, {
+  "id" : 12,
+  "produtoId" : 2,
+  "tipo" : "SAIDA_VENDA",
+  "quantidade" : 1,
+  "dataHora" : "2026-05-28T18:21:23.4128995",
+  "motivo" : "Venda%20Controlada%207"
+}, {
+  "id" : 13,
+  "produtoId" : 2,
+  "tipo" : "SAIDA_VENDA",
+  "quantidade" : 1,
+  "dataHora" : "2026-05-28T18:23:34.8038955",
+  "motivo" : "Venda%20Controlada%208"
+}, {
+  "id" : 14,
+  "produtoId" : 2,
+  "tipo" : "SAIDA_VENDA",
+  "quantidade" : 8,
+  "dataHora" : "2026-05-28T18:23:56.7813358",
+  "motivo" : "Venda%20Controlada%209"
 } ]

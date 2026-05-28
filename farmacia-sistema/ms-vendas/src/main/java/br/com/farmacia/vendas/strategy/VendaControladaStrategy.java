@@ -70,7 +70,8 @@ public class VendaControladaStrategy implements VendaStrategy {
     @Override
     public void processar(ItemVenda item, Venda venda) {
 
-        HttpEntity<?> entity = new HttpEntity<>(getHeaders());
+        HttpHeaders headers = getHeaders();
+        HttpEntity<?> entity = new HttpEntity<>(headers);
 
         restTemplate.exchange(
                 estoqueUrl + "/api/estoque/saida?produtoId=" + item.getProdutoId()
@@ -88,10 +89,14 @@ public class VendaControladaStrategy implements VendaStrategy {
         registro.put("tipo", "SAIDA");
         registro.put("vendaId", venda.getId());
 
+        System.out.println("URL SNGPC: " + sngpcUrl);
+        System.out.println("REGISTRO: " + registro);
+        System.out.println("AUTH HEADER: " + headers.getFirst("Authorization"));
+
         restTemplate.exchange(
                 sngpcUrl + "/api/sngpc/registrar",
                 HttpMethod.POST,
-                new HttpEntity<>(registro, getHeaders()),
+                new HttpEntity<>(registro, headers),
                 Void.class
         );
     }
