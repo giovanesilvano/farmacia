@@ -6,6 +6,9 @@ interface Props {
 }
 
 interface TokenPayload {
+    sub: string;
+    perfil: string;
+    id: number;
     exp: number;
 }
 

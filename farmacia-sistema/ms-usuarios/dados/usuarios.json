@@ -10,4 +10,10 @@
   "login" : "eloisa",
   "senha" : "$2a$10$d39qAmmLNJsSZNabw4uWDewiDuOFD4JeHPgmpGRDeFAs1hOv3TRGG",
   "perfil" : "ATENDENTE"
+}, {
+  "id" : 6,
+  "nome" : null,
+  "login" : "julia",
+  "senha" : "$2a$10$pgq65D5nMKNEZjjMeOiHsOcc5xVrKQ7wq0xe0BhSvjDJCqnvGEXDC",
+  "perfil" : "GERENTE"
 } ]

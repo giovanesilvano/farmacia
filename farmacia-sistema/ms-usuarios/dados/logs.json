@@ -83,4 +83,19 @@
   "usuarioId" : 5,
   "acao" : "LOGIN",
   "dataHora" : "2026-05-28T18:27:13.8708236"
+}, {
+  "id" : 18,
+  "usuarioId" : 4,
+  "acao" : "LOGIN",
+  "dataHora" : "2026-05-28T18:36:20.6134003"
+}, {
+  "id" : 19,
+  "usuarioId" : 5,
+  "acao" : "LOGIN",
+  "dataHora" : "2026-05-28T18:37:31.7171655"
+}, {
+  "id" : 20,
+  "usuarioId" : 4,
+  "acao" : "LOGIN",
+  "dataHora" : "2026-05-28T18:38:53.0921218"
 } ]

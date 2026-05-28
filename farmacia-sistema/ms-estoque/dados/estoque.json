@@ -1,10 +1,4 @@
 [ {
-  "id" : 1,
-  "produtoId" : 1,
-  "quantidade" : 9,
-  "dataValidade" : "2028-02-12",
-  "lote" : "ABC-123"
-}, {
   "id" : 2,
   "produtoId" : 1,
   "quantidade" : 0,
@@ -23,6 +17,12 @@
   "dataValidade" : "2028-02-12",
   "lote" : "2"
 }, {
+  "id" : 1,
+  "produtoId" : 1,
+  "quantidade" : 7,
+  "dataValidade" : "2028-02-12",
+  "lote" : "ABC-123"
+}, {
   "id" : 5,
   "produtoId" : 2,
   "quantidade" : 0,
@@ -31,7 +31,7 @@
 }, {
   "id" : 6,
   "produtoId" : 2,
-  "quantidade" : 112,
+  "quantidade" : 110,
   "dataValidade" : "2030-03-12",
   "lote" : "asdasdas"
 } ]

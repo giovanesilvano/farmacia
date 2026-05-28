@@ -96,4 +96,32 @@
   "quantidade" : 8,
   "dataHora" : "2026-05-28T18:23:56.7813358",
   "motivo" : "Venda%20Controlada%209"
+}, {
+  "id" : 15,
+  "produtoId" : 1,
+  "tipo" : "SAIDA_VENDA",
+  "quantidade" : 1,
+  "dataHora" : "2026-05-28T18:37:49.3924719",
+  "motivo" : "Venda%2010"
+}, {
+  "id" : 16,
+  "produtoId" : 2,
+  "tipo" : "SAIDA_VENDA",
+  "quantidade" : 1,
+  "dataHora" : "2026-05-28T18:37:49.4250905",
+  "motivo" : "Venda%20Controlada%2010"
+}, {
+  "id" : 17,
+  "produtoId" : 1,
+  "tipo" : "SAIDA_VENDA",
+  "quantidade" : 1,
+  "dataHora" : "2026-05-28T18:37:57.7327182",
+  "motivo" : "Venda%2011"
+}, {
+  "id" : 18,
+  "produtoId" : 2,
+  "tipo" : "SAIDA_VENDA",
+  "quantidade" : 1,
+  "dataHora" : "2026-05-28T18:37:57.7649084",
+  "motivo" : "Venda%20Controlada%2011"
 } ]

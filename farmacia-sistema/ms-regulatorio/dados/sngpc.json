@@ -14,4 +14,20 @@
   "quantidade" : 8,
   "dataHora" : "2026-05-28T18:23:56.7978922",
   "vendaId" : 9
+}, {
+  "id" : 3,
+  "produtoId" : 2,
+  "nomeProduto" : "CONTROLADO",
+  "tipo" : "SAIDA",
+  "quantidade" : 1,
+  "dataHora" : "2026-05-28T18:37:49.4440863",
+  "vendaId" : 10
+}, {
+  "id" : 4,
+  "produtoId" : 2,
+  "nomeProduto" : "CONTROLADO",
+  "tipo" : "SAIDA",
+  "quantidade" : 1,
+  "dataHora" : "2026-05-28T18:37:57.7917748",
+  "vendaId" : 11
 } ]
