@@ -16,4 +16,10 @@
   "login" : "julia",
   "senha" : "$2a$10$pgq65D5nMKNEZjjMeOiHsOcc5xVrKQ7wq0xe0BhSvjDJCqnvGEXDC",
   "perfil" : "GERENTE"
+}, {
+  "id" : 7,
+  "nome" : null,
+  "login" : "carlos",
+  "senha" : "$2a$10$IfIUeK3aNiXwSq86Iy0i1e6SXk7X6yzbe5X/9SxhHqrOobhrBrpti",
+  "perfil" : "FARMACEUTICO"
 } ]

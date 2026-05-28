@@ -164,8 +164,8 @@ function UsuariosPage() {
                 className="w-full border p-3 rounded-lg"
               >
 
-                <option value="ADMIN">
-                  ADMIN
+                <option value="FARMACEUTICO">
+                  FARMACEUTICO
                 </option>
 
                 <option value="GERENTE">
