@@ -27,10 +27,18 @@ public class ReceitaRepository {
 
     public Receita save(Receita r) {
         List<Receita> lista = findAll();
-        if (r.getId() == null) r.setId(lista.stream().mapToLong(x -> x.getId()).max().orElse(0L) + 1);
-        lista.removeIf(x -> x.getId().equals(r.getId()));
+
+        r.setId(
+                lista.stream()
+                        .mapToLong(x -> x.getId() == null ? 0L : x.getId())
+                        .max()
+                        .orElse(0L) + 1
+        );
+
         lista.add(r);
+
         JsonFileHandler.escreverArquivo(arquivo(), lista);
+
         return r;
     }
 }

@@ -6,6 +6,12 @@ import br.com.farmacia.shared.exception.EstoqueInsuficienteException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Component
 public class VendaComumStrategy implements VendaStrategy {
@@ -13,15 +19,51 @@ public class VendaComumStrategy implements VendaStrategy {
     private String estoqueUrl;
     private final RestTemplate restTemplate = new RestTemplate();
 
+    private HttpHeaders getHeaders() {
+
+        HttpServletRequest request =
+                ((ServletRequestAttributes)
+                        RequestContextHolder.currentRequestAttributes())
+                        .getRequest();
+
+        String authHeader =
+                request.getHeader("Authorization");
+
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.set("Authorization", authHeader);
+
+        return headers;
+    }
+
     @Override
     public void validar(ItemVenda item) {
-        Integer saldo = restTemplate.getForObject(estoqueUrl + "/api/estoque/saldo/" + item.getProdutoId(), Integer.class);
+
+        HttpEntity<?> entity = new HttpEntity<>(getHeaders());
+
+        Integer saldo = restTemplate.exchange(
+                estoqueUrl + "/api/estoque/saldo/" + item.getProdutoId(),
+                HttpMethod.GET,
+                entity,
+                Integer.class
+        ).getBody();
+
         if (saldo == null || saldo < item.getQuantidade())
             throw new EstoqueInsuficienteException("Estoque insuficiente para: " + item.getNomeProduto());
     }
 
     @Override
     public void processar(ItemVenda item, Venda venda) {
-        restTemplate.postForObject(estoqueUrl + "/api/estoque/saida?produtoId=" + item.getProdutoId() + "&quantidade=" + item.getQuantidade() + "&motivo=Venda%20" + venda.getId(), null, Void.class);
+
+        HttpEntity<?> entity = new HttpEntity<>(getHeaders());
+
+        restTemplate.exchange(
+                estoqueUrl + "/api/estoque/saida?produtoId=" + item.getProdutoId()
+                        + "&quantidade=" + item.getQuantidade()
+                        + "&motivo=Venda%20" + venda.getId(),
+                HttpMethod.POST,
+                entity,
+                Void.class
+        );
     }
 }

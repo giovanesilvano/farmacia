@@ -5,4 +5,11 @@
   "controlado" : false,
   "estoqueMinimo" : 13,
   "preco" : 1
+}, {
+  "id" : 2,
+  "nome" : "CONTROLADO",
+  "codigoBarras" : "1238791203129",
+  "controlado" : true,
+  "estoqueMinimo" : 0,
+  "preco" : 10
 } ]

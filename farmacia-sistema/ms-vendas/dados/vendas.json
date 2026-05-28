@@ -1,16 +1,16 @@
 [ {
   "id" : 1,
-  "dataHora" : "2026-05-21T16:38:46.3322642",
-  "cliente" : "",
-  "status" : "FINALIZADA",
-  "total" : 20,
+  "dataHora" : "2026-05-28T16:33:15.6778218",
+  "cliente" : "TESTE",
+  "status" : "ABERTA",
+  "total" : 10,
   "itens" : [ {
-    "produtoId" : 1,
-    "nomeProduto" : "anti-inflamatório",
-    "controlado" : false,
+    "produtoId" : 2,
+    "nomeProduto" : "CONTROLADO",
+    "controlado" : true,
     "quantidade" : 1,
-    "precoUnitario" : 20,
+    "precoUnitario" : 10,
     "receitaId" : 0,
-    "subtotal" : 20
+    "subtotal" : 10
   } ]
 } ]

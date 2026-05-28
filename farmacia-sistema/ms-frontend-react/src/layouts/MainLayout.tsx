@@ -39,6 +39,10 @@ function MainLayout({ children }: Props) {
             path: "/usuarios"
         },
         {
+            label: "Receitas",
+            path: "/receitas"
+        },
+        {
             label: "Regulatório",
             path: "/regulatorio"
         }
