@@ -5,7 +5,7 @@ import br.com.farmacia.usuarios.model.LogOperacao;
 import br.com.farmacia.usuarios.model.Usuario;
 import br.com.farmacia.usuarios.repository.LogRepository;
 import br.com.farmacia.usuarios.repository.UsuarioRepository;
-import br.com.farmacia.usuarios.service.JwtService;
+import br.com.farmacia.shared.security.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -41,7 +41,11 @@ public class UsuarioService {
 
         registrarLog(u.getId(), "LOGIN");
 
-        return jwtService.gerarToken(u);
+        return jwtService.gerarToken(
+                u.getLogin(),
+                u.getPerfil().name(),
+                u.getId()
+        );
     }
 
     public Usuario salvar(Usuario u) {

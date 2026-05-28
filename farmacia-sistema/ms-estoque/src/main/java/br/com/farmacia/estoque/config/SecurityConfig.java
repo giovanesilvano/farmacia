@@ -1,4 +1,4 @@
-package br.com.farmacia.usuarios.config;
+package br.com.farmacia.estoque.config;
 
 import br.com.farmacia.shared.security.JwtFilter;
 import br.com.farmacia.shared.security.JwtService;
@@ -33,10 +33,11 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> {})
+
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/usuarios/login").permitAll()
                         .anyRequest().authenticated()
                 )
+
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(
                                 SessionCreationPolicy.STATELESS
@@ -53,6 +54,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+
         return new BCryptPasswordEncoder();
     }
 }

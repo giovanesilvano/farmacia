@@ -5,6 +5,7 @@ import VendasPage from "../pages/VendasPage";
 import EstoquePage from "../pages/EstoquePage";
 import DashboardPage from "../pages/DashboardPage";
 import LoginPage from "../pages/LoginPage";
+import PrivateRoute from "./PrivateRoute";
 
 function AppRoutes() {
 
@@ -19,22 +20,38 @@ function AppRoutes() {
 
         <Route
             path="/"
-            element={<DashboardPage />}
+            element={
+                <PrivateRoute>
+                    <DashboardPage />
+                </PrivateRoute>
+            }
         />
 
         <Route
             path="/produtos"
-            element={<ProdutosPage />}
+            element={
+                <PrivateRoute>
+                    <ProdutosPage />
+                </PrivateRoute>
+            }
         />
 
         <Route
             path="/vendas"
-            element={<VendasPage />}
+            element={
+                <PrivateRoute>
+                    <VendasPage />
+                </PrivateRoute>
+            }   
         />
 
         <Route
             path="/estoque"
-            element={<EstoquePage />}
+            element={
+                <PrivateRoute>
+                    <EstoquePage />
+                </PrivateRoute>
+            }
         />
 
     </Routes>
